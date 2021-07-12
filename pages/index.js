@@ -43,7 +43,7 @@ export default function Home() {
                   <li>
                     <a href={`/users/${githubUser}`} key={githubUser}>
                       <img src={`https://github.com/${itemAtual}.png`} />
-                      <span>{githubUser}</span>
+                      <span>{itemAtual}</span>
                     </a>
                   </li>
                 )
