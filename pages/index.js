@@ -8,13 +8,21 @@ function ProfileSideBar(props){
   return(
     <Box>
     <img src={`https://github.com/${props.githubUser}.png`} style={{borderRadius: '8px'}} />
+    <hr />
    </Box>
   );
 }
 
 export default function Home() {
   const githubUser = 'GeronimoOlanda'; // criando variavel para setar o user
-  const pessoasFavoritas = ['juunegreiros', 'GeronimoOlanda', 'peas', 'rafaballerini', 'marcobrunodev', 'felipefialho'];
+  const pessoasFavoritas = [
+    'juunegreiros',
+    'GeronimoOlanda',
+    'peas', 
+    'rafaballerini', 
+    'marcobrunodev', 
+    'felipefialho'
+  ];
 
   return (
     <>
@@ -28,7 +36,6 @@ export default function Home() {
         <div className="welcomeArea" style={{gridArea: 'welcomeArea'}}>
           <Box>
             <h1 className="title">bem vindo</h1>
-
             <OrkutNostalgicIconSet />
           </Box>
         </div>
