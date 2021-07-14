@@ -15,7 +15,6 @@ function ProfileSideBar(props){
     <p>
       <a className="boxLink" href={`https://github.com/${props.githubUser}`}>
         @{props.githubUser} 
-
       </a>
     </p>
     <hr />
@@ -24,6 +23,25 @@ function ProfileSideBar(props){
   );
 }
 
+function ProfileRelationsBox(props){
+  return(
+    <ProfileRelationsBoxWrapper>
+    <h2 className="smallTitle"> {props.title}({props.items.length})</h2>
+    <ul>
+        {/* seguidores.map((itemAtual)=>{
+            return(
+            <li key={itemAtual}>
+              <a href={`https://github.com/${itemAtual}.png`} >
+              <img src={itemAtual.image} />
+                <span>{itemAtual.title}</span>
+              </a>
+            </li>
+          )
+        })*/}
+       </ul>
+    </ProfileRelationsBoxWrapper>
+  )
+}
 export default function Home() {
  
   const githubUser = 'GeronimoOlanda';
@@ -43,17 +61,21 @@ export default function Home() {
     'felipefialho'
   ];
   // 0 - Pegar o array de dados do github
+const [seguidores, setSeguidores] = React.useState([]);
 
-const seguidores = fetch('https://api.github.com/users/GeronimoOlanda/followers')
-.then(function(respostaDoServidor){
-    return respostaDoServidor.json();
-  })
-  .then(function(RespostaCompleta){
-    console.log(RespostaCompleta);
-  })
+  React.useEffect(function(){
+      fetch('https://api.github.com/users/GeronimoOlanda/followers')
+
+    .then(function(respostaDoServidor){
+        return respostaDoServidor.json();
+      })
+
+      .then(function(RespostaCompleta){
+       setSeguidores(RespostaCompleta);
+      })
+
+  }, []);
   // 1 - criar um box que vai ter um map, baseado nos itens do array do github
-
-  //
   return (
     <>
       <AlurakutMenu/>
@@ -101,21 +123,7 @@ const seguidores = fetch('https://api.github.com/users/GeronimoOlanda/followers'
      
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
         
-          <ProfileRelationsBoxWrapper>
-        <h2 className="smallTitle"> Comunidades ({seguidores.length})</h2>
-        <ul>
-            {seguidores.map((itemAtual)=>{
-                return(
-                <li key={itemAtual}>
-                  <a href={`https://github.com/${itemAtual}.png`} >
-                  <img src={itemAtual.image} />
-                    <span>{itemAtual.title}</span>
-                  </a>
-                </li>
-              )
-            })}
-           </ul>
-        </ProfileRelationsBoxWrapper>
+        <ProfileRelationsBox title="Seguidores" items={seguidores} />
         <ProfileRelationsBoxWrapper>
         <h2 className="smallTitle"> Comunidades ({comunidades.length})</h2>
         <ul>
