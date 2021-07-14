@@ -42,7 +42,18 @@ export default function Home() {
     'marcobrunodev', 
     'felipefialho'
   ];
+  // 0 - Pegar o array de dados do github
 
+const seguidores = fetch('https://api.github.com/users/GeronimoOlanda/followers')
+.then(function(respostaDoServidor){
+    return respostaDoServidor.json();
+  })
+  .then(function(RespostaCompleta){
+    console.log(RespostaCompleta);
+  })
+  // 1 - criar um box que vai ter um map, baseado nos itens do array do github
+
+  //
   return (
     <>
       <AlurakutMenu/>
@@ -89,6 +100,22 @@ export default function Home() {
         </div>
      
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
+        
+          <ProfileRelationsBoxWrapper>
+        <h2 className="smallTitle"> Comunidades ({seguidores.length})</h2>
+        <ul>
+            {seguidores.map((itemAtual)=>{
+                return(
+                <li key={itemAtual}>
+                  <a href={`https://github.com/${itemAtual}.png`} >
+                  <img src={itemAtual.image} />
+                    <span>{itemAtual.title}</span>
+                  </a>
+                </li>
+              )
+            })}
+           </ul>
+        </ProfileRelationsBoxWrapper>
         <ProfileRelationsBoxWrapper>
         <h2 className="smallTitle"> Comunidades ({comunidades.length})</h2>
         <ul>
