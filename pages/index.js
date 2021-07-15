@@ -75,7 +75,7 @@ const [seguidores, setSeguidores] = React.useState([]);
       fetch('https://graphql.datocms.com/', {
         method: 'POST',
         headers: {
-          'Authorization': '361aa11281fbc877d8d7f4fd582be0',
+          'Authorization': ' ',
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
