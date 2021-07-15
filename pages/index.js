@@ -121,13 +121,27 @@ const [seguidores, setSeguidores] = React.useState([]);
                 const comunidade = {
                   id: new Date().toISOString(),
                   titulo: dataDoForm.get('title'),
-                  imagem: dataDoForm.get('image'),
+                  imageUrl: dataDoForm.get('image'),
                 }
 
-               
-                const comunidadesAtualizada = [...comunidades, comunidade];
+                fetch('/api/comunidades', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(comunidade)
+                })
+                .then(async (response) => {
+                  const dados = await response.json();
+                  console.log(dados.registroCriado);
+                  const comunidade = dados.registroCriado;
+                  const comunidadesAtualizadas = [...comunidades, comunidade];
+                  setComunidades(comunidadesAtualizadas)
 
+                const comunidadesAtualizada = [...comunidades, comunidade];
                 setComunidades(comunidadesAtualizada);
+                })
+
               }}>
 
                 <div>
