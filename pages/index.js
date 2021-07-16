@@ -1,6 +1,8 @@
 
 
 import React from 'react';
+import nookies from 'nookies';
+import jwt from 'jsonwebtoken';
 
 import { MainGrid } from '../src/components/MainGrid';
 import { Box } from '../src/components/Box';
@@ -43,8 +45,9 @@ function ProfileRelationsBox(props){
     </ProfileRelationsBoxWrapper>
   )
 }
-export default function Home() {
- 
+export default function Home(props) {
+  const usuarioAleatorio = props.githubUser;
+
   const githubUser = 'GeronimoOlanda';
   const [comunidades, setComunidades] =  React.useState([]);
   
@@ -75,15 +78,16 @@ const [seguidores, setSeguidores] = React.useState([]);
       fetch('https://graphql.datocms.com/', {
         method: 'POST',
         headers: {
-          'Authorization': ' ',
+          'Authorization': '361aa11281fbc877d8d7f4fd582be0',
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-        },
+        }, 
         body: JSON.stringify({ "query": `query {
           allCommunities {
             id
             title
             imageUrl
+            creatorSlug
           }
         }` })
       })
@@ -198,3 +202,14 @@ const [seguidores, setSeguidores] = React.useState([]);
     </>
     );
 }
+export async function getServerSideProps(context) {
+  const cookies = nookies.get(context)
+  const token = cookies.USER_TOKEN;
+  const { githubUser } = jwt.decode(token);
+  
+  return {
+    props: {
+      githubUser
+    }, // will be passed to the page component as props
+  }
+} 
