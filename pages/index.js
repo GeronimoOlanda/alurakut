@@ -114,7 +114,7 @@ const [seguidores, setSeguidores] = React.useState([]);
       <MainGrid>
         {/*"grid-area: profileArea;"*/}
         <div className="profileArea" style={{gridArea: 'profileArea'}}>
-          <ProfileSideBar githubUser={githubUser}/>
+          <ProfileSideBar githubUser={usuarioAleatorio}/>
         </div>
 
         <div className="welcomeArea" style={{gridArea: 'welcomeArea'}}>
@@ -130,10 +130,14 @@ const [seguidores, setSeguidores] = React.useState([]);
 
                 const dataDoForm = new FormData(event.target);// pega os dados do formulario
 
+                console.log('Campo: ', dadosDoForm.get('title'));
+                console.log('Campo: ', dadosDoForm.get('image'));
+                
                 const comunidade = {
                   id: new Date().toISOString(),
                   titulo: dataDoForm.get('title'),
                   imageUrl: dataDoForm.get('image'),
+                  creatorSlug: usuarioAleatorio,
                 }
 
                 fetch('/api/comunidades', {
