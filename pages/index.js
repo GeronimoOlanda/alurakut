@@ -33,18 +33,7 @@ function ProfileRelationsBox(props){
   return(
     <ProfileRelationsBoxWrapper>
     <h2 className="smallTitle"> {props.title}({props.items.length})</h2>
-    <ul>
-        {/* seguidores.map((itemAtual)=>{
-            return(
-            <li key={itemAtual}>
-              <a href={`https://github.com/${itemAtual}.png`} >
-              <img src={itemAtual.image} />
-                <span>{itemAtual.title}</span>
-              </a>
-            </li>
-          )
-        })*/}
-       </ul>
+
     </ProfileRelationsBoxWrapper>
   )
 }
@@ -53,7 +42,7 @@ export default function Home(props) {
 
   const githubUser = 'GeronimoOlanda';
   const [comunidades, setComunidades] =  React.useState([]);
-  
+
 
   const pessoasFavoritas = [
     'juunegreiros',
@@ -63,6 +52,11 @@ export default function Home(props) {
     'marcobrunodev', 
     'felipefialho'
   ];
+  const pessoasSeguidoras = [
+    'juunegreiros',
+    'GeronimoOlanda',
+    'peas'
+  ]
   React.useEffect(()=>{
       document.title = "Alurakut- A sua imersão total!";
   }, []);
@@ -129,9 +123,6 @@ const [seguidores, setSeguidores] = React.useState([]);
                 event.preventDefault();
 
                 const dataDoForm = new FormData(event.target);// pega os dados do formulario
-
-                console.log('Campo: ', dadosDoForm.get('title'));
-                console.log('Campo: ', dadosDoForm.get('image'));
                 
                 const comunidade = {
                   id: new Date().toISOString(),
@@ -172,8 +163,23 @@ const [seguidores, setSeguidores] = React.useState([]);
         </div>
      
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
-        
-        <ProfileRelationsBox title="Seguidores" items={seguidores} />
+        <ProfileRelationsBoxWrapper>
+            <h2 className="smallTitle">Pessoas da Comunidade ({pessoasSeguidoras.length})</h2>
+            <ul>
+              {pessoasSeguidoras.map((itemAtual)=>{
+               
+                return(
+                  <li  key={itemAtual}>
+                    <a href={`/users/${itemAtual}`}>
+                      <img src={`https://github.com/${itemAtual}.png`} />
+                      <span>{itemAtual}</span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+            
+          </ProfileRelationsBoxWrapper>
         <ProfileRelationsBoxWrapper>
         <h2 className="smallTitle"> Comunidades ({comunidades.length})</h2>
         <ul>
@@ -207,8 +213,6 @@ const [seguidores, setSeguidores] = React.useState([]);
             </ul>
             
           </ProfileRelationsBoxWrapper>
-        </div>
-        <div>
         </div>
       </MainGrid>
     </>
