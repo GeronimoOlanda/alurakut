@@ -1,6 +1,9 @@
 
 
 import React from 'react';
+import ReactDOM from 'react-dom'
+import Favicon from 'react-favicon'
+
 import nookies from 'nookies';
 import jwt from 'jsonwebtoken';
 
@@ -102,6 +105,7 @@ const [seguidores, setSeguidores] = React.useState([]);
   // 1 - criar um box que vai ter um map, baseado nos itens do array do github
   return (
     <>
+     <Favicon url='https://iconape.com/wp-content/files/sz/283706/svg/283706.svg'  title="AkuraKut" />
       <AlurakutMenu/>
       <MainGrid>
         {/*"grid-area: profileArea;"*/}
