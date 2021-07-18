@@ -64,9 +64,9 @@ export default function Home(props) {
     'felipefialho'
   ];
   React.useEffect(()=>{
-      document.title = "Akurakut- A sua imersão total!";
+      document.title = "Alurakut- A sua imersão total!";
   }, []);
-  
+
   // 0 - Pegar o array de dados do github
 const [seguidores, setSeguidores] = React.useState([]);
 
