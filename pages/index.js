@@ -164,7 +164,7 @@ const [seguidores, setSeguidores] = React.useState([]);
      
         <div className="profileRelationsArea" style={{gridArea: 'profileRelationsArea'}}>
         <ProfileRelationsBoxWrapper>
-            <h2 className="smallTitle">Pessoas da Comunidade ({pessoasSeguidoras.length})</h2>
+            <h2 className="smallTitle">Seguidores({pessoasSeguidoras.length})</h2>
             <ul>
               {pessoasSeguidoras.map((itemAtual)=>{
                
