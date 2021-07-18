@@ -1,13 +1,23 @@
 import React from 'react';
 // Hook do NextJS
 import { useRouter } from 'next/router';
+
+import ReactDOM from 'react-dom'
+import Favicon from 'react-favicon'
+
 import nookies from 'nookies';
 
 export default function LoginScreen() {
   const router = useRouter();
   const [githubUser, setGithubUser] = React.useState('');
 
+  React.useEffect(()=>{
+    document.title = "Alurakut- Login";
+}, []);
+
   return (
+    <>
+  <Favicon url='https://iconape.com/wp-content/files/sz/283706/svg/283706.svg'  title="AluraKut" />
     <main style={{ display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <div className="loginScreen">
         <section className="logoArea">
@@ -79,5 +89,6 @@ export default function LoginScreen() {
         </footer>
       </div>
     </main>
+    </>
   )
 }  
